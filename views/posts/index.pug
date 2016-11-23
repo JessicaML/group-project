@@ -1,0 +1,39 @@
+extends ../application.pug
+
+block content
+  .container.col-md-4.float-xs-right
+      h3 About this blog
+      ul.nav.nav-tabs.nav-stacked
+        li
+          a(href='#') Contact us
+        li
+          a(href='#') More info
+        li
+          a(href='#') Another Link
+
+      //- a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
+      //- a(href="my-posts" style="margin-left:5px" class="btn btn-primary float-xs-right") My posts
+
+      //- a(href="admin/posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
+
+
+
+  .container.col-md-8
+    .row
+      .col-xs-8.offset-xs-2
+
+        h1 All posts from this blog
+        hr
+        each blogPost in blogPosts
+          .card.card-block
+            .col-xs-12.col-md-8
+            .col-md-8
+              a(href="/" + blogPost.slug)
+                h2= blogPost.title
+                p= blogPost.content
+                .col-xs-6.text-xs-right
+                  a.btn.btn-warning(href='/admin/posts/' + blogPost.id +'/edit') Edit Post
+                .col-xs-6.text-xs-right
+                  form(action='/admin/posts/' + blogPost.id, method='POST')
+                    input(type='hidden', name='_method', value='DELETE')
+                    button.btn.btn-danger(type='submit') Remove Post

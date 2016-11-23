@@ -1,0 +1,22 @@
+html
+  head
+    title Blog Application
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
+  body
+    nav(class="navbar navbar-light bg-faded")
+      a(class="navbar-brand" href="/") Home
+      //- a(class="navbar-brand" href="admin/login") Admin panel
+
+      if user
+        a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
+        a(href="posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
+        a(href="my-posts" style="margin-left:5px" class="btn btn-warning float-xs-right") My posts
+        p=user.name
+
+      else
+        a(href="admin/users/new" style="margin-left:5px" class="btn btn-primary float-xs-right") Register an account
+        a(href="admin/login" style="margin-left:5px" class="btn btn-success float-xs-right") Login
+
+      //- a(href="admin/posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
+
+    block content
