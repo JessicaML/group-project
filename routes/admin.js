@@ -1,7 +1,13 @@
 var express = require('express'),
     db = require('../models'),
     bodyParser = require('body-parser'),
-    router = express.Router();
+    router = express.Router(),
+    fs = require('fs');
+
+var dataFilmInMemory = JSON.parse(fs.readFileSync("data.json").toString())["films"];
+
+var dataBookInMemory = JSON.parse(fs.readFileSync("data.json").toString())["books"];
+
 
 // var requireUser = (req, res, next) => {
 //   if (req.path === '/admin') {
@@ -26,7 +32,7 @@ router.use(bodyParser.urlencoded({ extended: false}));
 //gets home page
 router.get('/posts', (req, res) => {
   db.Post.findAll({ order: [['createdAt', 'DESC']] }).then((blogPosts) => {
-    res.render('posts/index', { blogPosts: blogPosts, user: req.session.user });
+    res.render('posts/index', { films: dataFilmInMemory, books: dataBookInMemory, user: req.session.user });
   }).catch((error) => {
     throw error;
   });

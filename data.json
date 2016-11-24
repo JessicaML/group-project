@@ -12,7 +12,7 @@
 	{
 		"title": "Ulysses",
 		"slug": "ulysses",
-		"imageSrc": "../images/ulysses.jpg",
+		"imageSrc": "https://images-na.ssl-images-amazon.com/images/I/51qFi0rYw7L._SX329_BO1,204,203,200_.jpg",
 		"authorName": "James Joyce",
 		"description": "Like Homers Iliad, but some guy bumbling around Dublin. Birth of Modernism I think.",
 		"numberOfPages": "424"
@@ -21,7 +21,7 @@
 	{
 		"title": "War and Peace",
 		"slug": "war-and-peace",
-		"imageSrc": "../images/war-and-peace.jpeg",
+		"imageSrc": "http://wordpress-imageuploads-prod.s3.amazonaws.com/wp-content/uploads/2015/06/5331224290_7d7b40478f.jpg",
 		"authorName": "Leo Tolstoy",
 		"description": "Napoleon invades Russia, two friends complain about their wives.",
 		"numberOfPages": "4664"
