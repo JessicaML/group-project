@@ -18,22 +18,19 @@ block content
 
 
 
-  .container.col-md-8
-    .row
-      .col-xs-8.offset-xs-2
+      .container
+        h1 Films
+        //- .row
+        //-   each film in films
+        //-     .col-xs-3
+        //-       a(href="/films/" + film.slug)
+        //-         img(width="145" height="235" src=film.imageSrc)
+        //-       h3= film.title
 
-        h1 All posts from this blog
-        hr
-        each blogPost in blogPosts
-          .card.card-block
-            .col-xs-12.col-md-8
-            .col-md-8
-              a(href="/" + blogPost.slug)
-                h2= blogPost.title
-                p= blogPost.content
-                .col-xs-6.text-xs-right
-                  a.btn.btn-warning(href='/admin/posts/' + blogPost.id +'/edit') Edit Post
-                .col-xs-6.text-xs-right
-                  form(action='/admin/posts/' + blogPost.id, method='POST')
-                    input(type='hidden', name='_method', value='DELETE')
-                    button.btn.btn-danger(type='submit') Remove Post
+        h1 Books
+        //- .row
+        //-   each book in books
+        //-     .col-xs-3
+        //-       a(href="/books/" + book.slug)
+        //-         img(width="145" height="235" src=book.imageSrc)
+        //-       h3= book.title

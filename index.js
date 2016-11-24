@@ -3,7 +3,12 @@ const express = require('express'),
       methodOverride = require('method-override'),
       pug = require('pug'),
       logger = require('morgan'),
-      session = require('express-session');
+      session = require('express-session'),
+      fs = require('fs');
+
+var dataFilmInMemory = JSON.parse(fs.readFileSync("data.json").toString())["films"];
+
+var dataBookInMemory = JSON.parse(fs.readFileSync("data.json").toString())["books"];
 
 
 var db = require('./models');
@@ -16,7 +21,11 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 
-app.use(session({ secret: 'our secret key'}));
+app.use(session({
+   secret: 'our secret key',
+   resave: true,
+   saveUninitialized: true
+ }));
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
@@ -44,13 +53,19 @@ app.post('/posts/:id/comments', (req, res) => {
 
 
 //gets homepage list of posts
-app.get('/', (req, res) => {
-  console.log("hey");
-  console.log(req.session);
+// app.get('/', (req, res) => {
+//   console.log("hey");
+//   console.log(req.session);
+//
+//   db.Post.findAll({ order: [['createdAt', 'DESC']] }).then((blogPosts) => {
+//     res.render('index', { blogPosts: blogPosts});
+//   });
+// });
 
-  db.Post.findAll({ order: [['createdAt', 'DESC']] }).then((blogPosts) => {
-    res.render('index', { blogPosts: blogPosts});
-  });
+
+app.get('/', function(req, res) {
+	console.log('Requesting /media');
+	res.send(pug.renderFile('views/index.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
 });
 
 app.get('/register', (req, res) => {
