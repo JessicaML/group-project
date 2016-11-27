@@ -2,21 +2,21 @@
   "development": {
     "username": "Jessica",
     "password": null,
-    "database": "blog-app",
+    "database": "bookclub",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "Jessica",
     "password": null,
-    "database": "blog-app",
+    "database": "bookclub",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "Jessica",
     "password": null,
-    "database": "blog-app",
+    "database": "bookclub",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
