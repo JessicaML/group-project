@@ -1,0 +1,34 @@
+extends ../application.pug
+
+block content
+  .container.col-md-4.float-xs-right
+      h3 About this blog
+      ul.nav.nav-tabs.nav-stacked
+        li
+          a(href='#') Contact us
+        li
+          a(href='#') More info
+        li
+          a(href='#') Another Link
+
+      //- a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
+      //- a(href="my-posts" style="margin-left:5px" class="btn btn-primary float-xs-right") My posts
+
+      //- a(href="admin/posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
+
+
+
+  .container
+    h1 My books give-list
+
+    .row
+      each book in books
+        .col-xs-3
+          a(href="/books/" + book.slug)
+            img(width="145" height="235" src=book.imageSrc)
+          h3= book.title
+          .col-xs-6.text-xs-right
+            form
+              //- form(action='/admin/posts/' + userPost.id, method='POST')
+              input(type='hidden', name='_method', value='DELETE')
+              button.btn.btn-danger(type='submit') Remove

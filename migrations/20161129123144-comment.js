@@ -2,26 +2,24 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.createTable('Readers', {
+    return queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      password: {
+      content: {
         type: Sequelize.TEXT
       },
-      aboutme: {
-        type: Sequelize.TEXT
+      BookId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Books',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -44,7 +42,7 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.dropTable('Readers');
+    return queryInterface.dropTable('Comments');
 
     /*
       Add reverting commands here.

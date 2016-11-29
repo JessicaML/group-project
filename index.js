@@ -29,6 +29,8 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
+// hack for delete
+
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     // look in urlencoded POST bodies and delete it
@@ -41,85 +43,117 @@ app.use(methodOverride(function (req, res) {
 app.use('/admin', adminRouter);
 
 // comment posted to db
-app.post('/posts/:id/comments', (req, res) => {
-  db.Post.findById(req.params.id).then((post) => {
+app.post('/books/:id/comments', (req, res) => {
+  db.Book.findById(req.params.id).then((post) => {
     var comment = req.body;
-    comment.PostId = post.id;
+    comment.BookId = book.id;
     db.Comment.create(comment).then(() => {
-      res.redirect('/' + post.slug);
+      res.redirect('/' + book.slug);
         });
   });
 });
 
 
-//gets homepage list of posts
-// app.get('/', (req, res) => {
-//   console.log("hey");
-//   console.log(req.session);
-//
-//   db.Post.findAll({ order: [['createdAt', 'DESC']] }).then((blogPosts) => {
-//     res.render('index', { blogPosts: blogPosts});
-//   });
-// });
 
 
-app.get('/', function(req, res) {
-	console.log('Requesting /media');
-	res.send(pug.renderFile('views/index.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
-});
+// gets landing page
 
-app.get('/register', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/posts');
-  }
-  res.render('users/new');
-});
-
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-app.post('/login', (req, res) => {
-  db.User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then((userInDB) => {
-    if (userInDB.password === req.body.password) {
-      req.session.user = userInDB;
-      res.redirect('/admin/posts');
-    } else {
-      res.redirect('/login');
-    }
-  }).catch(() => {
-    res.redirect('/login');
+app.get('/', (req, res) => {
+  db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
+    res.render('index', { books: books, sponsor: req.session.sponsor });
+  }).catch((error) => {
+    throw error;
   });
 });
 
-//post user data
-app.post('/users', (req, res) => {
-  db.User.create(req.body).then((user) => {
+//login as sponsor
+
+app.get('/login-sponsor', (req, res) => {
+  res.render('login-sponsor');
+});
+
+//login as reader
+
+app.get('/login-reader', (req, res) => {
+  res.render('login-reader');
+});
+
+//post sponsor login
+
+app.post('/login-sponsor', (req, res) => {
+  db.Sponsor.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then((sponsorInDB) => {
+    if (sponsorInDB.password === req.body.password) {
+      req.session.sponsor = sponsorInDB;
+      res.redirect('/admin/books');
+    } else {
+      res.redirect('/login-sponsor');
+    }
+  }).catch(() => {
+    res.redirect('/login-sponsor');
+  });
+});
+
+//post reader login
+
+
+app.post('/login-reader', (req, res) => {
+  db.Reader.findOne({
+    where: {
+      email: req.body.email
+    }
+  }).then((readerInDB) => {
+    if (readerInDB.password === req.body.password) {
+      req.session.user = readerInDB;
+      res.redirect('/admin/books');
+    } else {
+      res.redirect('/login-reader');
+    }
+  }).catch(() => {
+    res.redirect('/login-reader');
+  });
+});
+
+// create sponsor post sponsor data
+app.post('/sponsors', (req, res) => {
+  db.Sponsor.create(req.body).then((sponsor) => {
     res.redirect('/');
   }).catch(() => {
     res.redirect('register');
   });
 });
 
+// create reader post reader data
+
+app.post('/readers', (req, res) => {
+  db.Reader.create(req.body).then((reader) => {
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('register');
+  });
+});
+
+//log out
+
 app.get('/logout', (req, res) => {
-  req.session.user = undefined;
+  req.session.sponsor = undefined;
+  req.session.reader = undefined;
   res.redirect('/');
 });
 
 
 //get post show page
 app.get('/:slug', (req, res) => {
-  db.Post.findOne({
+  db.Book.findOne({
     where: {
       slug: req.params.slug
     }
   }).then((post) => {
-    return post.getComments().then((comments) => {
-      res.render('posts/show', { post: post, comments: comments });
+    return book.getComments().then((comments) => {
+      res.render('books/show', { book: book, comments: comments, sponsor: req.session.sponsor });
     });
   }).catch((error) => {
     res.status(404).end();
