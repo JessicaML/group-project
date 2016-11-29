@@ -31,7 +31,7 @@ var express = require('express'),
 // router.use(requireReader);
 
 
-
+//gets landing page homepage
 
 router.get('/', (req, res) => {
   res.redirect('/books');
@@ -42,6 +42,15 @@ router.use(bodyParser.urlencoded({ extended: false}));
 
 //gets home page
 router.get('/', (req, res) => {
+  db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
+    res.render('books/index', { books: books, sponsor: req.session.sponsor });
+  }).catch((error) => {
+    throw error;
+  });
+});
+
+
+router.get('/admin/books', (req, res) => {
   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
     res.render('books/index', { books: books, sponsor: req.session.sponsor });
   }).catch((error) => {
@@ -63,7 +72,7 @@ router.get('/my-posts', (req, res) => {
 
 
 //gets new page
-router.get('/books/new', (req, res) => {
+router.get('/new', (req, res) => {
   res.render('books/new');
 });
 
@@ -107,39 +116,6 @@ router.get('/login-sponsor', (req, res) => {
   res.render('login-sponsor');
 });
 
-router.post('/login-sponsor', (req, res) => {
-  db.Sponsor.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then((sponsorInDB) => {
-    if (sponsorInDB.password === req.body.password) {
-      req.session.sponsor = sponsorInDB;
-      res.redirect('/admin/books');
-    } else {
-      res.redirect('/login-sponsor');
-    }
-  }).catch(() => {
-    res.redirect('/login-sponsor');
-  });
-});
-
-router.post('/login-reader', (req, res) => {
-  db.Reader.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then((readerInDB) => {
-    if (readerInDB.password === req.body.password) {
-      req.session.user = readerInDB;
-      res.redirect('/admin/books');
-    } else {
-      res.redirect('/login-reader');
-    }
-  }).catch(() => {
-    res.redirect('/login-reader');
-  });
-});
 
 
 router.get('/sponsor', (req, res) => {
