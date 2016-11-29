@@ -1,0 +1,55 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Bookclub
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/stylish-portfolio.css', rel='stylesheet')
+    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+  body
+    a#menu-toggle.btn.btn-dark.btn-lg.toggle(href='#')
+      i.fa.fa-bars
+    nav#sidebar-wrapper
+      ul.sidebar-nav
+        a#menu-close.btn.btn-light.btn-lg.pull-right.toggle(href='#')
+          i.fa.fa-times
+    header#top.header
+      .text-vertical-center
+        h1 Lorenzo Balzi
+        h3 Full Stack Web Developer
+        br
+        |
+        a.btn.btn-dark.btn-lg(href='#about') Find Out More
+    section#services.services.bg-primary
+      .container
+        .row.text-center
+          .col-lg-10.col-lg-offset-1
+            h2 My Skills
+            hr.small
+            .row
+              .col-md-4.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-compass.fa-stack-1x.text-primary
+                  h4
+                    strong Make a booklist
+              .col-md-4.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-flask.fa-stack-1x.text-primary
+                  h4
+                    strong Create a budget
+              .col-md-4.col-sm-6
+                .service-item
+                  span.fa-stack.fa-4x
+                    i.fa.fa-circle.fa-stack-2x
+                    i.fa.fa-shield.fa-stack-1x.text-primary
+                  h4
+                    strong Publish booklist
