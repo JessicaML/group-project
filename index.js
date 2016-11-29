@@ -21,8 +21,6 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 
-app.use(express.static(__dirname + '/public'));
-
 app.use(session({
    secret: 'our secret key',
    resave: true,
@@ -67,10 +65,8 @@ app.post('/posts/:id/comments', (req, res) => {
 
 app.get('/', function(req, res) {
 	console.log('Requesting /media');
-	res.send(pug.renderFile('views/indexx.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
+	res.send(pug.renderFile('views/index.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
 });
-
-
 
 app.get('/register', (req, res) => {
   if (req.session.user) {
