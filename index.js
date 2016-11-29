@@ -84,7 +84,6 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-
   db.User.findOne({
     where: {
       email: req.body.email

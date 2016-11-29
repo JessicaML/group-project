@@ -12,24 +12,31 @@ html
     nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
       .container
         .navbar-header
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-
           a.navbar-brand(href='#') Bookclub Foundation
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='#') Home
-            li
-              a(href='#') Register
-            li
-              a(href='#') Login
-            li
-              a(href='#') Contact Us
-            li
-              a(href='#') Another Link
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li
+                a(href='#') Home
+              li
+                a(href='#') Register
+              li
+                a(href='#') Login
+              li
+                a(href='#') Contact Us
+              li
+                a(href='#') Another Link
+      if user
+        a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
+        a(href="posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Add book
+        a(href="my-posts" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
+        p(style="margin-left:5px" class="btn btn-warning float-xs-right") Welcome back, #{user.name}!
+
+
+      else
+        a(href="admin/users/new" style="margin-left:5px" class="btn btn-primary float-xs-right") Register as a sponsor
+        a(href="admin/users/new" style="margin-left:5px" class="btn btn-info float-xs-right") Register as a reader
+        a(href="admin/login" style="margin-left:5px" class="btn btn-success float-xs-right") Login
+
+      //- a(href="admin/posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
 
     block content
