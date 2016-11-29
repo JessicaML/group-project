@@ -1,20 +1,20 @@
 {
   "development": {
-    "username": "apple",
+    "username": "process.ENV.DB_USERNAME",
     "password": null,
     "database": "blog-app",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "apple",
+    "username": "process.ENV.DB_USERNAME",
     "password": null,
     "database": "blog-app",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "apple",
+    "username": "process.ENV.DB_USERNAME",
     "password": null,
     "database": "blog-app",
     "host": "127.0.0.1",
