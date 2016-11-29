@@ -1,17 +1,16 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Post = sequelize.define('Post', {
-    title: DataTypes.STRING,
-    slug: DataTypes.STRING,
-    content: DataTypes.TEXT
+  var Reader = sequelize.define('Reader', {
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    aboutme: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        this.hasMany(models.Comment);
       }
     }
   });
-
-  return Post;
+  return Reader;
 };
