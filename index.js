@@ -84,11 +84,6 @@ app.get('/login', (req, res) => {
 });
 
 
-app.get('/porcodio', (req, res) => {
-  res.render('posts/index', { books: dataBookInMemory });
-});
-
-
 app.post('/login', (req, res) => {
 
   db.User.findOne({
