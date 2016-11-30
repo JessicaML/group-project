@@ -3,6 +3,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     router = express.Router();
 
+    router.use(bodyParser.urlencoded({ extended: false}));
+
 
 // var requireSponsor = (req, res, next) => {
 //   if (req.path === '/sponsor') {
@@ -31,65 +33,62 @@ var express = require('express'),
 // router.use(requireReader);
 
 
-//gets landing page homepage
-
-router.get('/', (req, res) => {
-  res.redirect('/books');
-});
 
 
-router.use(bodyParser.urlencoded({ extended: false}));
-
-//gets home page
-router.get('/', (req, res) => {
-  db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
-    res.render('books/index', { books: books, sponsor: req.session.sponsor });
-  }).catch((error) => {
-    throw error;
-  });
-});
-
-
+// gets give-list page after login
 router.get('/admin/books', (req, res) => {
   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
-    res.render('books/index', { books: books, sponsor: req.session.sponsor });
+    res.render('books/index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader });
   }).catch((error) => {
     throw error;
   });
 });
 
-//gets userPosts
-
-//if statement to find only logged-in user posts
-
-router.get('/my-posts', (req, res) => {
-  // db.Post.findUserPosts({ order: [['createdAt', 'DESC']] }).then((userPosts) => {
-    res.render('books/user-posts')
-  // }).catch((error) => {
-  //   throw error;
-  // });
-});
 
 
-//gets new page
-router.get('/new', (req, res) => {
+//gets my profile page
+router.get('/my-profile', (req, res) => {
+    res.render('books/my-profile');
+  });
+
+
+//gets create new book page
+router.get('/books/new', (req, res) => {
   res.render('books/new');
 });
 
-//get register page
-router.get('/users/new', (req, res) => {
-  res.render('users/new');
-});
 
+
+//get register page for sponsors
 
 router.get('/users/sponsor', (req, res) => {
   res.render('users/sponsor');
 });
 
+//get register page for readers
+
 router.get('/users/reader', (req, res) => {
   res.render('users/reader');
 });
 
+
+// get page to register new sponsor
+router.get('/sponsor', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/sponsor');
+});
+
+// get page to register new reader
+router.get('/reader', (req, res) => {
+  if (req.session.user) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/reader');
+});
+
+//posts data to create sponsor-user
 router.post('/sponsors', (req, res) => {
   db.Sponsor.create(req.body).then((sponsor) => {
     res.redirect('/');
@@ -98,6 +97,7 @@ router.post('/sponsors', (req, res) => {
   });
 });
 
+//posts data to create reader-user
 router.post('/readers', (req, res) => {
   db.Reader.create(req.body).then((reader) => {
     res.redirect('/');
@@ -106,31 +106,6 @@ router.post('/readers', (req, res) => {
   });
 });
 
-
-//get login page
-router.get('/login-reader', (req, res) => {
-  res.render('login-reader');
-});
-
-router.get('/login-sponsor', (req, res) => {
-  res.render('login-sponsor');
-});
-
-
-
-router.get('/sponsor', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/books');
-  }
-  res.render('users/sponsor');
-});
-
-router.get('/reader', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/books');
-  }
-  res.render('users/reader');
-});
 
 //gets edit pg
 router.get('/books/:id/edit', (req, res) => {
