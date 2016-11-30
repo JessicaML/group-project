@@ -10,7 +10,6 @@ var express = require('express'),
 //post sponsor login
 
 router.post('/login-sponsor', (req, res) => {
-  console.log("does this bit work??");
   db.Sponsor.findOne({
     where: {
       email: req.body.email
@@ -18,7 +17,7 @@ router.post('/login-sponsor', (req, res) => {
   }).then((sponsorInDB) => {
     if (sponsorInDB.password === req.body.password) {
       req.session.sponsor = sponsorInDB;
-      res.redirect('/');
+      res.redirect('/books');
     } else {
       res.redirect('/login-sponsor');
     }
@@ -31,8 +30,6 @@ router.post('/login-sponsor', (req, res) => {
 
 
 router.post('/login-reader', (req, res) => {
-  console.log("does this bit work??");
-
   db.Reader.findOne({
     where: {
       email: req.body.email

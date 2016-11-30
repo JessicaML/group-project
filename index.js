@@ -15,6 +15,16 @@ var authenticationRouter = require('./routes/authentication');
 
 app.set('view engine', 'pug');
 
+// hack for delete
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
+
 app.use(logger('dev'));
 
 app.use(session({
@@ -53,16 +63,20 @@ app.get('/login-reader', (req, res) => {
   res.render('login-reader');
 });
 //get book show page
-app.get('/:slug', (req, res) => {
+app.get('/books/:slug', (req, res) => {
   db.Book.findOne({
     where: {
       slug: req.params.slug
     }
   }).then((book) => {
-    return book.getComments().then((comments) => {
-      res.render('books/show', { book: book, comments: comments, sponsor: req.session.sponsor });
-    });
-  }).catch((error) => {
+    console.log("BOOK SLUG IS");
+    console.log(req.params.slug);
+    console.log(book.title);
+    return book
+  }).then((book) => {
+      res.render('books/show', { book: book });
+    }).catch((error) => {
+    console.log("ERROR");
     res.status(404).end();
   });
 });
@@ -79,15 +93,7 @@ app.post('/books/:id/comments', (req, res) => {
   });
 });
 
-// hack for delete
-app.use(methodOverride(function (req, res) {
-  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-    // look in urlencoded POST bodies and delete it
-    var method = req.body._method;
-    delete req.body._method;
-    return method;
-  }
-}));
+
 
 db.sequelize.sync().then(() => {
   app.listen(3000, () => {

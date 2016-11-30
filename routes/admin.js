@@ -6,20 +6,20 @@ var express = require('express'),
     router.use(bodyParser.urlencoded({ extended: false}));
 
 
-// var requireSponsor = (req, res, next) => {
-//   if (req.path === '/sponsor') {
-//     return next();
-//   }
-//   if (req.session.sponsor) {
-//     next();
-//   } else {
-//     res.redirect('/login-sponsor');
-//   }
-// };
-//
-// router.use(requireSponsor);
-//
-// var requireUser = (req, res, next) => {
+var requireSponsor = (req, res, next) => {
+  if (req.path === '/sponsor') {
+    return next();
+  }
+  if (req.session.sponsor) {
+    next();
+  } else {
+    res.redirect('/login-sponsor');
+  }
+};
+
+router.use(requireSponsor);
+
+// var requireReader = (req, res, next) => {
 //   if (req.path === '/reader') {
 //     return next();
 //   }
@@ -48,20 +48,18 @@ router.get('/admin/books', (req, res) => {
 
 //gets my profile page
 router.get('/books/my-profile', (req, res) => {
-  db.Sponsor.findOne({
-    where: {
-      sponsor: req.session.sponsor
-    }
-  }).then((sponsor) => {
+  db.Sponsor.findOne().then((sponsor) => {
     res.render('books/my-profile', {sponsor: req.session.sponsor} );
   });
 });
 
 //gets create new book page
-router.get('/books/new', (req, res) => {
-  res.render('books/new');
-});
 
+router.get('/books/new', (req, res) => {
+  db.Sponsor.findOne().then((sponsor) => {
+    res.render('books/new', {sponsor: req.session.sponsor} );
+  });
+});
 
 
 //get register page for sponsors
@@ -126,14 +124,12 @@ router.get('/books/:id/edit', (req, res) => {
 //posts book data to db
 router.post('/books', (req, res) => {
   db.Book.create(req.body).then((book) => {
-    res.redirect('/' + book.slug);
+    res.redirect('/books/' + book.slug);
   });
 });
 
 //posts comment
 router.post('/books/:id/comments', (req, res) => {
-  console.log(req.params.content);
-  console.log(db.comment);
   db.Post.findById(req.params.id).then((post) => {
     var comment = req.body;
     comment.BookId = book.id;
@@ -154,7 +150,6 @@ router.put('/posts/:id', (req, res) => {
     res.redirect('/admin/books');
   });
 });
-
 
 //deletes  blog data in db
 router.delete('/books/:id', (req, res) => {
