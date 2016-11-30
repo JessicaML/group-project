@@ -58,7 +58,7 @@ app.get('/:slug', (req, res) => {
     where: {
       slug: req.params.slug
     }
-  }).then((post) => {
+  }).then((book) => {
     return book.getComments().then((comments) => {
       res.render('books/show', { book: book, comments: comments, sponsor: req.session.sponsor });
     });

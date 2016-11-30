@@ -47,10 +47,15 @@ router.get('/admin/books', (req, res) => {
 
 
 //gets my profile page
-router.get('/my-profile', (req, res) => {
-    res.render('books/my-profile');
+router.get('/books/my-profile', (req, res) => {
+  db.Sponsor.findOne({
+    where: {
+      sponsor: req.session.sponsor
+    }
+  }).then((sponsor) => {
+    res.render('books/my-profile', {sponsor: req.session.sponsor} );
   });
-
+});
 
 //gets create new book page
 router.get('/books/new', (req, res) => {

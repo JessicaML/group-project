@@ -9,14 +9,14 @@ html
 
       if sponsor
         a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
-        a(href="books/new" style="margin-left:5px" class="btn btn-success float-xs-right") Add book
-        a(href="my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
-        p(style="margin-left:5px" class="btn btn-warning float-xs-right") Welcome back, #{sponsor.name}!
+        a(href="admin/books/new" style="margin-left:5px" class="btn btn-success float-xs-right") Add book
+        a(href="admin/books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
+        p(style="margin-left:5px" class="float-xs-right") Welcome back, #{sponsor.name}!
 
       else if reader
         a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
-        a(href="my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
-        p(style="margin-left:5px" class="btn btn-warning float-xs-right") Welcome back, #{reader.name}!
+        a(href="admin/books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
+        p(style="margin-left:5px" class="float-xs-right") Welcome back, #{reader.name}!
 
 
       else
