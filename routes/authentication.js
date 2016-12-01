@@ -17,7 +17,7 @@ router.post('/login-sponsor', (req, res) => {
   }).then((sponsorInDB) => {
     if (sponsorInDB.password === req.body.password) {
       req.session.sponsor = sponsorInDB;
-      res.redirect('/books');
+      res.redirect('/admin/books');
     } else {
       res.redirect('/login-sponsor');
     }

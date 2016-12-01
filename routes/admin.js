@@ -36,7 +36,7 @@ router.use(requireSponsor);
 
 
 // gets give-list page after login
-router.get('/admin/books', (req, res) => {
+router.get('/books', (req, res) => {
   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
     res.render('books/index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader });
   }).catch((error) => {
