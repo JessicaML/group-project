@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         this.setDataValue('passwordDigest', bcrypt.hashSync(password, 10));
       }
     },
-    aboutme: DataTypes.STRING,
+    about: DataTypes.STRING,
     passwordDigest: DataTypes.STRING,
   }, {
     classMethods: {

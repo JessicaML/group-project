@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     author: DataTypes.STRING,
     imgURL: DataTypes.STRING,
     slug: DataTypes.STRING,
-    content: DataTypes.STRING,
+    description: DataTypes.STRING,
     SponsorId: {
       type: DataTypes.INTEGER,
       references: {
