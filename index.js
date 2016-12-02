@@ -1,8 +1,8 @@
 const express = require('express'),
-      bodyParser = require('body-parser'),
       methodOverride = require('method-override'),
       pug = require('pug'),
       logger = require('morgan'),
+      bcrypt = require('bcrypt'),
       session = require('express-session');
 
 var db = require('./models');
@@ -33,7 +33,6 @@ app.use(session({
    saveUninitialized: true
  }));
 
-app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use('/admin', adminRouter);
 app.use('/authentication', authenticationRouter);
@@ -62,6 +61,57 @@ app.get('/login-sponsor', (req, res) => {
 app.get('/login-reader', (req, res) => {
   res.render('login-reader');
 });
+
+// get page to register new sponsor
+app.get('/sponsor', (req, res) => {
+  if (req.session.sponsor) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/sponsor');
+});
+
+// get page to register new reader
+app.get('/reader', (req, res) => {
+  if (req.session.reader) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/reader');
+});
+
+//posts data to create sponsor-user
+app.post('/sponsors', (req, res) => {
+  console.log("Is this happening?");
+  console.log(req.body);
+
+  db.Sponsor.create(req.body).then((sponsor) => {
+    req.session.sponsor = sponsor;
+
+    console.log("2 - Is this?");
+    console.log(req.body);
+
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/sponsor');
+  });
+});
+
+//posts data to create reader-user
+app.post('/readers', (req, res) => {
+  console.log("Is this happening?");
+  console.log(req.body);
+  db.Reader.create(req.body).then((reader) => {
+    req.session.reader = reader;
+
+    console.log("2 - Is this?");
+    console.log(req.body);
+
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/reader');
+  });
+});
+
+
 //get book show page
 app.get('/books/:slug', (req, res) => {
   db.Book.findOne({
@@ -69,14 +119,10 @@ app.get('/books/:slug', (req, res) => {
       slug: req.params.slug
     }
   }).then((book) => {
-    console.log("BOOK SLUG IS");
-    console.log(req.params.slug);
-    console.log(book.title);
     return book
   }).then((book) => {
       res.render('books/show', { book: book });
     }).catch((error) => {
-    console.log("ERROR");
     res.status(404).end();
   });
 });

@@ -1,6 +1,6 @@
 html
   head
-    title Blog Application
+    title Bookclub
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
   body
     nav(class="navbar navbar-light bg-faded")
@@ -10,14 +10,12 @@ html
       if sponsor
         a(href="authentication/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
         a(href="admin/books/new" style="margin-left:5px" class="btn btn-success float-xs-right") Add book
-        a(href="admin/books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
+        a(href="books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
         p(style="margin-left:5px" class="float-xs-right") Welcome back, #{sponsor.name}!
-
       else if reader
         a(href="authentication/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
-        a(href="admin/books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
+        a(href="books/my-profile" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
         p(style="margin-left:5px" class="float-xs-right") Welcome back, #{reader.name}!
-
       else
         a(href="admin/users/sponsor" style="margin-left:5px" class="btn btn-primary float-xs-right") Register as a sponsor
         a(href="admin/users/reader" style="margin-left:5px" class="btn btn-info float-xs-right") Register as a reader

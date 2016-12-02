@@ -18,5 +18,9 @@ block content
     .card.card-block
       .col-xs-12.col-md-8
       .col-md-8
-        h2=sponsor.name
-        p=sponsor.aboutme
+        if sponsor
+          h2=sponsor.name
+          p=sponsor.aboutme
+        else
+          h2=reader.name
+          p=reader.aboutme

@@ -1,9 +1,10 @@
-var express = require('express'),
-    db = require('../models'),
-    bodyParser = require('body-parser'),
-    router = express.Router();
+const express = require('express'),
+     db = require('../models'),
+     bodyParser = require('body-parser'),
+     router = express.Router(),
+     bcrypt = require('bcrypt');
 
-    router.use(bodyParser.urlencoded({ extended: false}));
+router.use(bodyParser.urlencoded({ extended: false}));
 
 
 
@@ -14,38 +15,75 @@ router.post('/login-sponsor', (req, res) => {
     where: {
       email: req.body.email
     }
-  }).then((sponsorInDB) => {
-    if (sponsorInDB.password === req.body.password) {
-      req.session.sponsor = sponsorInDB;
-      res.redirect('/admin/books');
-    } else {
-      res.redirect('/login-sponsor');
-    }
-  }).catch(() => {
-    res.redirect('/login-sponsor');
+  }).then((userInDB) => {
+    bcrypt.compare(req.body.password, userInDB.passwordDigest, (error, result) => {
+      if (result) {
+        req.session.sponsor = userInDB;
+        res.redirect('/');
+      } else {
+        res.render('login');
+      }
+    });
+  }).catch((error) => {
+    res.render('login');
   });
 });
 
 //post reader login
-
 
 router.post('/login-reader', (req, res) => {
   db.Reader.findOne({
     where: {
       email: req.body.email
     }
-  }).then((readerInDB) => {
-    if (readerInDB.password === req.body.password) {
-      req.session.user = readerInDB;
-      res.redirect('/admin');
-    } else {
-      res.redirect('/login-reader');
-    }
-  }).catch(() => {
-    res.redirect('/login-reader');
+  }).then((userInDB) => {
+    bcrypt.compare(req.body.password, userInDB.passwordDigest, (error, result) => {
+      if (result) {
+        req.session.reader = userInDB;
+        res.redirect('/');
+      } else {
+        res.render('login');
+      }
+    });
+  }).catch((error) => {
+    res.render('login');
   });
 });
 
+
+
+//posts data to create sponsor-user
+router.post('/sponsors', (req, res) => {
+  console.log("Is this happening?");
+  console.log(req.body);
+
+  db.Sponsor.create(req.body).then((sponsor) => {
+    req.session.sponsor = sponsor;
+
+    console.log("2 - Is this?");
+    console.log(req.body);
+
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/sponsor');
+  });
+});
+
+//posts data to create reader-user
+router.post('/readers', (req, res) => {
+  console.log("Is this happening?");
+  console.log(req.body);
+  db.Reader.create(req.body).then((reader) => {
+    req.session.reader = reader;
+
+    console.log("2 - Is this?");
+    console.log(req.body);
+
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/reader');
+  });
+});
 
 //log out
 

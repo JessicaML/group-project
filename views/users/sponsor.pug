@@ -6,7 +6,7 @@ block content
       .col-xs-8.offset-xs-2
         h1 Create sponsor Account
         hr
-        form(action="/sponsors" method="POST")
+        form(action="/authentication/sponsors" method="POST")
           div(class="form-group")
             label(for="name") Name
             input(name="name" type="text" class="form-control" id="name")
@@ -15,7 +15,7 @@ block content
             input(name="email" type="text" class="form-control" id="email")
           div(class="form-group")
             label(for="password") Password
-            input(name="password" type="text" class="form-control" id="password")
+            input(name="password" type="password" class="form-control" id="password")
           div(class="form-group")
             label(for="aboutme") About me
             textarea(name="aboutme" class="form-control" rows=5 id="aboutme")

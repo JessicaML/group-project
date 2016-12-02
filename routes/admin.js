@@ -6,18 +6,18 @@ var express = require('express'),
     router.use(bodyParser.urlencoded({ extended: false}));
 
 
-var requireSponsor = (req, res, next) => {
-  if (req.path === '/sponsor') {
-    return next();
-  }
-  if (req.session.sponsor) {
-    next();
-  } else {
-    res.redirect('/login-sponsor');
-  }
-};
-
-router.use(requireSponsor);
+// var requireSponsor = (req, res, next) => {
+//   if (req.path === '/sponsor') {
+//     return next();
+//   }
+//   if (req.session.sponsor) {
+//     next();
+//   } else {
+//     res.redirect('/login-sponsor');
+//   }
+// };
+//
+// router.use(requireSponsor);
 
 // var requireReader = (req, res, next) => {
 //   if (req.path === '/reader') {
@@ -46,18 +46,19 @@ router.get('/books', (req, res) => {
 
 
 
-//gets my profile page
+//gets my profile page for sponsor
 router.get('/books/my-profile', (req, res) => {
-  db.Sponsor.findOne().then((sponsor) => {
-    res.render('books/my-profile', {sponsor: req.session.sponsor} );
+  db.Sponsor.findOne().then((sponsor, reader) => {
+    res.render('books/my-profile', {sponsor: req.session.sponsor, reader: req.session.reader } );
   });
 });
+
 
 //gets create new book page
 
 router.get('/books/new', (req, res) => {
-  db.Sponsor.findOne().then((sponsor) => {
-    res.render('books/new', {sponsor: req.session.sponsor} );
+  db.Sponsor.findOne().then((sponsor, reader) => {
+    res.render('books/new', {sponsor: req.session.sponsor, reader: req.session.reader} );
   });
 });
 
@@ -74,40 +75,6 @@ router.get('/users/reader', (req, res) => {
   res.render('users/reader');
 });
 
-
-// get page to register new sponsor
-router.get('/sponsor', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/books');
-  }
-  res.render('users/sponsor');
-});
-
-// get page to register new reader
-router.get('/reader', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/books');
-  }
-  res.render('users/reader');
-});
-
-//posts data to create sponsor-user
-router.post('/sponsors', (req, res) => {
-  db.Sponsor.create(req.body).then((sponsor) => {
-    res.redirect('/');
-  }).catch(() => {
-    res.redirect('/users/sponsor');
-  });
-});
-
-//posts data to create reader-user
-router.post('/readers', (req, res) => {
-  db.Reader.create(req.body).then((reader) => {
-    res.redirect('/');
-  }).catch(() => {
-    res.redirect('/users/reader');
-  });
-});
 
 
 //gets edit pg
