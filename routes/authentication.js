@@ -54,15 +54,8 @@ router.post('/login-reader', (req, res) => {
 
 //posts data to create sponsor-user
 router.post('/sponsors', (req, res) => {
-  console.log("Is this happening?");
-  console.log(req.body);
-
   db.Sponsor.create(req.body).then((sponsor) => {
     req.session.sponsor = sponsor;
-
-    console.log("2 - Is this?");
-    console.log(req.body);
-
     res.redirect('/');
   }).catch(() => {
     res.redirect('/users/sponsor');
@@ -71,14 +64,8 @@ router.post('/sponsors', (req, res) => {
 
 //posts data to create reader-user
 router.post('/readers', (req, res) => {
-  console.log("Is this happening?");
-  console.log(req.body);
   db.Reader.create(req.body).then((reader) => {
     req.session.reader = reader;
-
-    console.log("2 - Is this?");
-    console.log(req.body);
-
     res.redirect('/');
   }).catch(() => {
     res.redirect('/users/reader');

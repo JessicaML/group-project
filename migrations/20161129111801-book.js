@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      content: {
+      description: {
         type: Sequelize.TEXT
       },
       SponsorId: {

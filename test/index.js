@@ -2,33 +2,6 @@ var assert = require('assert');
 var db = require('../models');
 
 
-describe('First test jess', () => {
-  it('true must be true', () => {
-    assert.equal(true, true);
-  });
-
-  it('array[0] will give you the first element of the array.', () => {
-    var myArray = ['foo', 'bar', 'baz'];
-    assert.equal(myArray[0], 'foo');
-  });
-
-//test last item of array
-  it('array will give you the last element of the array.', () => {
-    var myArray = ['foo', 'bar', 'baz' ];
-    assert.equal(myArray[myArray.length -1], 'baz');
-  });
-});
-
-
-
-
-before((done) => {
-  db.sequelize.sync({ force: true }).then(() => {
-    done();
-  });
-});
-
-
   describe('Book Model', () => {
   before((done) => {
     db.sequelize.sync({ force: true }).then(() => {

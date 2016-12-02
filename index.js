@@ -43,8 +43,6 @@ app.use('/authentication', authenticationRouter);
 app.get('/', (req, res) => {
   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
     res.render('index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader});
-  }).catch((error) => {
-    throw error;
   });
 });
 
@@ -80,15 +78,8 @@ app.get('/reader', (req, res) => {
 
 //posts data to create sponsor-user
 app.post('/sponsors', (req, res) => {
-  console.log("Is this happening?");
-  console.log(req.body);
-
   db.Sponsor.create(req.body).then((sponsor) => {
     req.session.sponsor = sponsor;
-
-    console.log("2 - Is this?");
-    console.log(req.body);
-
     res.redirect('/');
   }).catch(() => {
     res.redirect('/users/sponsor');
@@ -97,14 +88,8 @@ app.post('/sponsors', (req, res) => {
 
 //posts data to create reader-user
 app.post('/readers', (req, res) => {
-  console.log("Is this happening?");
-  console.log(req.body);
   db.Reader.create(req.body).then((reader) => {
     req.session.reader = reader;
-
-    console.log("2 - Is this?");
-    console.log(req.body);
-
     res.redirect('/');
   }).catch(() => {
     res.redirect('/users/reader');
@@ -143,6 +128,5 @@ app.post('/books/:id/comments', (req, res) => {
 
 db.sequelize.sync().then(() => {
   app.listen(3000, () => {
-    console.log('Web server started at port 3000!');
   });
 });
