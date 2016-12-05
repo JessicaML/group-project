@@ -22,5 +22,7 @@ block content
           div(class="form-group")
             label(for="post-description") description
             textarea(name="description" class="form-control" rows=5 id="description")
+          div(class="form-group")
+            input(type="hidden" name="SponsorId" value=sponsor.id class="form-control")
           div(class="form-group text-xs-right")
             button(type="submit" class="btn btn-lg btn-success") Create book
