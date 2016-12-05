@@ -46,7 +46,6 @@ module.exports = {
 
   down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('Sponsors');
-
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

@@ -34,7 +34,6 @@ module.exports = {
       }
     });
 
-
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -46,7 +45,6 @@ module.exports = {
 
   down: function (queryInterface, Sequelize) {
     return queryInterface.dropTable('Readers');
-
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
