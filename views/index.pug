@@ -1,39 +1,27 @@
 extends ./application.pug
 
 block content
-  .container.col-md-4.float-xs-right
-      ul.nav.nav-tabs.nav-stacked
-        li
-          a(href='#') Contact us
-        li
-          a(href='#') More info
-        li
-          a(href='#') Another Link
 
+    .container
+      .row
+        .col-lg-12
+          h1.page-header Bookclub
+      each book in books
+        .col-lg-3.col-md-4.col-xs-6.thumb
+          a.thumbnail(href="/books/" + book.slug)
+            img.img-responsive(src=book.imageSrc, alt='')
+          h3= book.title
+      .col-lg-3.col-md-4.col-xs-6.thumb
+        a(href='#') Contact us
+        br
+        a(href='#') More info
+        br
+        a(href='#') Another link
         p Taxidermy williamsburg butcher, slow-carb mustache literally mumblecore affogato gentrify PBR&B cold-pressed. Hammock coloring book put a bird on it roof party. Godard fap aesthetic selvage, vinyl fixie pug YOLO try-hard poke lomo iceland. Blue bottle lyft distillery, craft beer man bun brooklyn salvia. Ennui tote bag bespoke post-ironic, normcore tattooed glossier church-key pitchfork PBRB iceland lyft.
-
-  .container.col-md-8
-    .row
-      .col-xs-8.offset-xs-2
-        h1 Bookclub
-        p Peer-to-peer book sponsoring
-
-        .container
-          h1 Recently sponsored books
-          .row
-            each book in books
-              .col-xs-3
-                a(href="/books/" + book.slug)
-                  img(width="145" height="235" src=book.imageSrc)
-                h3= book.title
-
-  //-     .col-xs-8.offset-xs-2
-  //-       h1 All posts from this blog
-  //-       hr
-  //-       each blogPost in blogPosts
-  //-         .card.card-block
-  //-           .col-xs-12.col-md-8
-  //-           .col-md-8
-  //-             a(href="/" + blogPost.slug)
-  //-               h2= blogPost.title
-  //-             p= blogPost.content
+      hr
+      footer
+        .row
+          .col-lg-12
+            p Copyright &copy;
+    script(src='js/jquery.js')
+    script(src='js/bootstrap.min.js')

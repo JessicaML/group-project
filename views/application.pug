@@ -2,23 +2,42 @@ html
   head
     title Blog Application
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
+    link(href='https://blackrockdigital.github.io/startbootstrap-thumbnail-gallery/css/bootstrap.min.css', rel='stylesheet')
+    link(href='https://blackrockdigital.github.io/startbootstrap-thumbnail-gallery/css/thumbnail-gallery.css', rel='stylesheet')
+    link(rel="stylesheet" href="css/login.css" crossorigin="anonymous")
   body
-    nav(class="navbar navbar-light bg-faded")
-      a(class="navbar-brand" href="/") Home
-      //- a(class="navbar-brand" href="admin/login") Admin panel
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
 
-      if user
-        a(href="/logout" style="margin-left:5px" class="btn btn-primary float-xs-right") Logout
-        a(href="posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Add book
-        a(href="my-posts" style="margin-left:5px" class="btn btn-warning float-xs-right") My profile
-        p(style="margin-left:5px" class="btn btn-warning float-xs-right") Welcome back, #{user.name}!
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              if user
+                li
+                  a(href='#') Home |
+                  li
+                    a(href='#') About
+                  li
+                    a(href='#') Services
+                  li
+                    a(href='#') Contact
+                  li
+                    p Welcome back, #{user.name}!
 
+              else
 
-      else
-        a(href="admin/users/new" style="margin-left:5px" class="btn btn-primary float-xs-right") Register as a sponsor
-        a(href="admin/users/new" style="margin-left:5px" class="btn btn-info float-xs-right") Register as a reader
-        a(href="admin/login" style="margin-left:5px" class="btn btn-success float-xs-right") Login
-
-      //- a(href="admin/posts/new" style="margin-left:5px" class="btn btn-success float-xs-right") Create new post
+                li
+                  a(href='#') Home |
+                  li
+                    a(href='#') Register as a sponsor
+                  li
+                    a(href='#') Register as a reader
+                  li
+                    a(href='#') Login
 
     block content

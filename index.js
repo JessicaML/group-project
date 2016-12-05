@@ -40,6 +40,8 @@ app.use(methodOverride(function (req, res) {
 
 app.use('/admin', adminRouter);
 
+app.use(express.static('public'));
+
 // comment posted to db
 app.post('/posts/:id/comments', (req, res) => {
   db.Post.findById(req.params.id).then((post) => {
@@ -67,6 +69,18 @@ app.get('/', function(req, res) {
 	console.log('Requesting /media');
 	res.send(pug.renderFile('views/index.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
 });
+
+app.get('/prova', function(req, res) {
+	console.log('Requesting /media');
+	res.send(pug.renderFile('views/gallery.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
+});
+
+app.get('/provaa', function(req, res) {
+	console.log('Requesting /media');
+	res.send(pug.renderFile('views/newlogin.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
+});
+
+
 
 app.get('/register', (req, res) => {
   if (req.session.user) {
@@ -111,19 +125,14 @@ app.get('/logout', (req, res) => {
 });
 
 
-//get post show page
-app.get('/:slug', (req, res) => {
-  db.Post.findOne({
+app.get('/books/:slug', (req, res) => {
+  db.books.findOne({
     where: {
       slug: req.params.slug
     }
-  }).then((post) => {
-    return post.getComments().then((comments) => {
-      res.render('posts/show', { post: post, comments: comments });
+  }).then((book) =>  {
+      res.render('posts/show.pug', { books: dataBookInMemory });
     });
-  }).catch((error) => {
-    res.status(404).end();
-  });
 });
 
 db.sequelize.sync().then(() => {
