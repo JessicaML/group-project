@@ -2,10 +2,10 @@
 module.exports = function(sequelize, DataTypes) {
   var Comment = sequelize.define('Comment', {
     content: DataTypes.TEXT,
-    PostId: {
+    BookId: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'Posts',
+        model: 'Books',
         key: 'id'
       }
     }
@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        this.belongsTo(models.Post);
+        this.belongsTo(models.Book);
       }
     }
   });

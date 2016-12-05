@@ -24,16 +24,5 @@ block content
             each book in books
               .col-xs-3
                 a(href="/books/" + book.slug)
-                  img(width="145" height="235" src=book.imageSrc)
+                  img(width="145" height="200" src=book.imgURL)
                 h3= book.title
-
-  //-     .col-xs-8.offset-xs-2
-  //-       h1 All posts from this blog
-  //-       hr
-  //-       each blogPost in blogPosts
-  //-         .card.card-block
-  //-           .col-xs-12.col-md-8
-  //-           .col-md-8
-  //-             a(href="/" + blogPost.slug)
-  //-               h2= blogPost.title
-  //-             p= blogPost.content

@@ -1,0 +1,26 @@
+extends ../application.pug
+
+block content
+  .container.col-md-4.float-xs-right
+      h3 About this blog
+      ul.nav.nav-tabs.nav-stacked
+        li
+          a(href='#') Contact us
+        li
+          a(href='#') More info
+        li
+          a(href='#') Another Link
+
+  .container.col-md-8
+    .row
+      .col-xs-8.offset-xs-2
+        h1 My profile
+    .card.card-block
+      .col-xs-12.col-md-8
+      .col-md-8
+        if sponsor
+          h2=sponsor.name
+          p=sponsor.about
+        else
+          h2=reader.name
+          p=reader.about

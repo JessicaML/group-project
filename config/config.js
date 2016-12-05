@@ -1,23 +1,23 @@
-{
+module.exports = {
   "development": {
-    "username": "Jessica",
+    "username": process.env.DB_USERNAME,
     "password": null,
     "database": "bookclub",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "Jessica",
+    "username": process.env.DB_USERNAME,
     "password": null,
-    "database": "bookclub",
+    "database": "bookclub_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "Jessica",
+    "username": process.env.DB_USERNAME,
     "password": null,
-    "database": "bookclub",
+    "database": "bookclub_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
-}
+};

@@ -6,7 +6,7 @@ block content
       .col-xs-8.offset-xs-2
         h1 Create reader Account
         hr
-        form(action="/users" method="POST")
+        form(action="/authentication/readers" method="POST")
           div(class="form-group")
             label(for="name") Name
             input(name="name" type="text" class="form-control" id="name")
@@ -15,9 +15,9 @@ block content
             input(name="email" type="text" class="form-control" id="email")
           div(class="form-group")
             label(for="password") Password
-            input(name="password" type="text" class="form-control" id="password")
+            input(name="password" type="password" class="form-control" id="password")
           div(class="form-group")
             label(for="about") About me
-            textarea(name="about" class="form-control" rows=5 id="about")
+            textarea(name="about" type="text" class="form-control" rows=5 id="about")
           div(class="form-group text-xs-right")
             button(type="submit" class="btn btn-lg btn-success") Create reader

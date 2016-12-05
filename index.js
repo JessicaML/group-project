@@ -1,34 +1,21 @@
 const express = require('express'),
-      bodyParser = require('body-parser'),
       methodOverride = require('method-override'),
       pug = require('pug'),
       logger = require('morgan'),
-      session = require('express-session'),
-      fs = require('fs');
-
-var dataFilmInMemory = JSON.parse(fs.readFileSync("data.json").toString())["films"];
-
-var dataBookInMemory = JSON.parse(fs.readFileSync("data.json").toString())["books"];
-
+      bcrypt = require('bcrypt'),
+      session = require('express-session');
 
 var db = require('./models');
 
 var app = express();
 
 var adminRouter = require('./routes/admin');
+var authenticationRouter = require('./routes/authentication');
+
 
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
-
-app.use(session({
-   secret: 'our secret key',
-   resave: true,
-   saveUninitialized: true
- }));
-
-app.use(bodyParser.urlencoded({ extended: false}));
-
+// hack for delete
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
     // look in urlencoded POST bodies and delete it
@@ -38,96 +25,108 @@ app.use(methodOverride(function (req, res) {
   }
 }));
 
+app.use(logger('dev'));
+
+app.use(session({
+   secret: 'our secret key',
+   resave: true,
+   saveUninitialized: true
+ }));
+
+
 app.use('/admin', adminRouter);
+app.use('/authentication', authenticationRouter);
+
+
+
+//gets home page
+app.get('/', (req, res) => {
+  db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
+    res.render('index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader});
+  });
+});
+
+
+
+//login as sponsor
+
+app.get('/login-sponsor', (req, res) => {
+  res.render('login-sponsor');
+});
+
+//login as reader
+
+app.get('/login-reader', (req, res) => {
+  res.render('login-reader');
+});
+
+// get page to register new sponsor
+app.get('/sponsor', (req, res) => {
+  if (req.session.sponsor) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/sponsor');
+});
+
+// get page to register new reader
+app.get('/reader', (req, res) => {
+  if (req.session.reader) {
+    res.redirect('/admin/books');
+  }
+  res.render('users/reader');
+});
+
+//posts data to create sponsor-user
+app.post('/sponsors', (req, res) => {
+  db.Sponsor.create(req.body).then((sponsor) => {
+    req.session.sponsor = sponsor;
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/sponsor');
+  });
+});
+
+//posts data to create reader-user
+app.post('/readers', (req, res) => {
+  db.Reader.create(req.body).then((reader) => {
+    req.session.reader = reader;
+    res.redirect('/');
+  }).catch(() => {
+    res.redirect('/users/reader');
+  });
+});
+
+
+//get book show page
+app.get('/books/:slug', (req, res) => {
+  db.Book.findOne({
+    where: {
+      slug: req.params.slug
+    }
+  }).then((book) => {
+    return book
+  }).then((book) => {
+      res.render('books/show', { book: book });
+    }).catch((error) => {
+    res.status(404).end();
+  });
+});
+
 
 // comment posted to db
-app.post('/posts/:id/comments', (req, res) => {
-  db.Post.findById(req.params.id).then((post) => {
+app.post('/books/:id/comments', (req, res) => {
+  db.Book.findById(req.params.id).then((post) => {
     var comment = req.body;
-    comment.PostId = post.id;
+    comment.BookId = book.id;
     db.Comment.create(comment).then(() => {
-      res.redirect('/' + post.slug);
+      res.redirect('/' + book.slug);
         });
   });
 });
 
 
-//gets homepage list of posts
-// app.get('/', (req, res) => {
-//   console.log("hey");
-//   console.log(req.session);
-//
-//   db.Post.findAll({ order: [['createdAt', 'DESC']] }).then((blogPosts) => {
-//     res.render('index', { blogPosts: blogPosts});
-//   });
-// });
-
-
-app.get('/', function(req, res) {
-	console.log('Requesting /media');
-	res.send(pug.renderFile('views/index.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
-});
-
-app.get('/register', (req, res) => {
-  if (req.session.user) {
-    res.redirect('/admin/posts');
-  }
-  res.render('users/new');
-});
-
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
-app.post('/login', (req, res) => {
-  db.User.findOne({
-    where: {
-      email: req.body.email
-    }
-  }).then((userInDB) => {
-    if (userInDB.password === req.body.password) {
-      req.session.user = userInDB;
-      res.redirect('/admin/posts');
-    } else {
-      res.redirect('/login');
-    }
-  }).catch(() => {
-    res.redirect('/login');
-  });
-});
-
-//post user data
-app.post('/users', (req, res) => {
-  db.User.create(req.body).then((user) => {
-    res.redirect('/');
-  }).catch(() => {
-    res.redirect('register');
-  });
-});
-
-app.get('/logout', (req, res) => {
-  req.session.user = undefined;
-  res.redirect('/');
-});
-
-
-//get post show page
-app.get('/:slug', (req, res) => {
-  db.Post.findOne({
-    where: {
-      slug: req.params.slug
-    }
-  }).then((post) => {
-    return post.getComments().then((comments) => {
-      res.render('posts/show', { post: post, comments: comments });
-    });
-  }).catch((error) => {
-    res.status(404).end();
-  });
-});
 
 db.sequelize.sync().then(() => {
   app.listen(3000, () => {
-    console.log('Web server started at port 3000!');
   });
 });
