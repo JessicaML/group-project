@@ -2,16 +2,14 @@ extends ./application.pug
 
 block content
   .container
-    .row
-      .col-xs-8.offset-xs-2
-        h1 Login
-        hr
-        form(action="/login" method="POST")
-          div(class="form-group")
-            label(for="email") Email
-            input(name="email" type="text" class="form-control" id="email")
-          div(class="form-group")
-            label(for="password") Password
-            input(name="password" type="text" class="form-control" id="password")
-          div(class="form-group text-xs-right")
-            button(type="submit" class="btn btn-lg btn-success") Submit
+    .wrapper
+      form.form-signin(action='/login', method='POST')
+        h3.form-signin-heading Welcome Back! Please Sign In
+        hr.colorgraph
+        br
+
+        input.form-control(type='text', name='Username', placeholder='Username', required='', autofocus='')
+
+        input.form-control(type='password', name='Password', placeholder='Password', required='')
+
+        button.btn.btn-lg.btn-primary.btn-block(name='Submit', value='Login', type='Submit') Login

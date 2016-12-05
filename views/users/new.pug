@@ -1,23 +1,20 @@
 extends ../application.pug
 
 block content
-  .container
-    .row
-      .col-xs-8.offset-xs-2
-        h1 Create an Account
-        hr
-        form(action="/users" method="POST")
-          div(class="form-group")
-            label(for="name") Name
-            input(name="name" type="text" class="form-control" id="name")
-          div(class="form-group")
-            label(for="surname") Surname
-            input(name="surname" type="text" class="form-control" id="surname")
-          div(class="form-group")
-            label(for="email") Email
-            input(name="email" type="text" class="form-control" id="email")
-          div(class="form-group")
-            label(for="password") Password
-            input(name="password" type="text" class="form-control" id="password")
-          div(class="form-group text-xs-right")
-            button(type="submit" class="btn btn-lg btn-success") Create a post
+              .container
+                .wrapper
+                  form.form-signin(action='/users', method='POST')
+                    h3.form-signin-heading Nice of you to join us!
+                    hr.colorgraph
+                    br
+
+                    input.form-control(type='text', name='name', placeholder='Name', required='', autofocus='')
+
+                    input.form-control(type='text', name='surname', placeholder='Surname', required='')
+
+                    input.form-control(type='text', name='email', placeholder='Email', required='', autofocus='')
+
+                    input.form-control(type='password', name='password', placeholder='Password', required='')
+
+
+                    button.btn.btn-lg.btn-primary.btn-block(name='Submit', value='Login', type='Submit') Create an account

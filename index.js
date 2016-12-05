@@ -75,11 +75,6 @@ app.get('/prova', function(req, res) {
 	res.send(pug.renderFile('views/gallery.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
 });
 
-app.get('/provaa', function(req, res) {
-	console.log('Requesting /media');
-	res.send(pug.renderFile('views/newlogin.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
-});
-
 
 
 app.get('/register', (req, res) => {
