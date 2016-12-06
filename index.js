@@ -72,7 +72,7 @@ app.get('/', function(req, res) {
 
 app.get('/prova', function(req, res) {
 	console.log('Requesting /media');
-	res.send(pug.renderFile('views/gallery.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
+	res.send(pug.renderFile('views/profile.pug', { films: dataFilmInMemory, books: dataBookInMemory }));
 });
 
 

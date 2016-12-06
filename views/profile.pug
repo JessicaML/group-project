@@ -1,0 +1,67 @@
+extends ./application.pug
+
+block content
+
+    .container
+      section(style='padding-bottom: 50px; padding-top: 50px;')
+        .row
+          .col-md-4
+            img.img-rounded.img-responsive(src='profilepic.png')
+            br
+            br
+
+            label Registered Username
+
+            input.form-control(type='text', placeholder='Demouser')
+
+            label Registered Name
+
+            input.form-control(type='text', placeholder='Jhon Deo')
+
+            label Registered Email
+
+            input.form-control(type='text', placeholder='jnondeao@gmail.com')
+            br
+
+            a.btn.btn-success(href='#') Update Details
+            br
+            br
+          .col-md-8
+            .alert.alert-info
+              h2 User Bio :
+              h4 Bootstrap user profile template
+              p
+                | Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+            div
+              a.btn.btn-social.btn-facebook(href='#')
+                i.fa.fa-facebook
+                |  &nbsp; Facebook
+              a.btn.btn-social.btn-google(href='#')
+                i.fa.fa-google-plus
+                |  &nbsp; Google
+              a.btn.btn-social.btn-twitter(href='#')
+                i.fa.fa-twitter
+                |  &nbsp; Twitter
+              a.btn.btn-social.btn-linkedin(href='#')
+                i.fa.fa-linkedin
+                |  &nbsp; Linkedin
+            .form-group.col-md-8
+              h3 Change Your Password
+              br
+
+              label Enter Old Password
+
+              input.form-control(type='password')
+
+              label Enter New Password
+
+              input.form-control(type='password')
+
+              label Confirm New Password
+
+              input.form-control(type='password')
+              br
+
+              a.btn.btn-warning(href='#') Change Password
+    script(src='assets/js/jquery-1.11.1.js')
+    script(src='assets/js/bootstrap.js')
