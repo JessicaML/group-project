@@ -12,6 +12,8 @@ var app = express();
 var adminRouter = require('./routes/admin');
 var authenticationRouter = require('./routes/authentication');
 
+app.use(express.static('public'));
+
 
 app.set('view engine', 'pug');
 
