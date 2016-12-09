@@ -9,4 +9,12 @@ block content
           h2=book.author
           img(width="145" height="200" src=book.imgURL)
           p=book.description
-          button(class="btn btn-success get-button") Get this book
+
+          form(action="/getbook/get-book" method="POST")
+            div(class="form-group")
+              input(type="hidden" name="ReaderId" value=reader.id class="form-control")
+            div(class="form-group")
+              input(type="hidden" name="BookId" value=book.id class="form-control")
+
+            div(class="form-group text-xs-right")
+              button(type="submit" class="get-button btn btn-success") Get this book

@@ -2,6 +2,27 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
+    return queryInterface.createTable('Gotbooks', {
+      BookId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Books',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
+      ReaderId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Readers',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      }
+
+    });
 
 
     /*
@@ -14,6 +35,7 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
+    return queryInterface.dropTable('Gotbooks');
 
     /*
       Add reverting commands here.

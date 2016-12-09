@@ -11,6 +11,7 @@ var app = express();
 
 var adminRouter = require('./routes/admin');
 var authenticationRouter = require('./routes/authentication');
+var getbookRouter = require('./routes/getbook');
 
 app.use(express.static('public'));
 
@@ -38,6 +39,7 @@ app.use(session({
 
 app.use('/admin', adminRouter);
 app.use('/authentication', authenticationRouter);
+app.use('/getbook', getbookRouter);
 
 
 
@@ -108,7 +110,7 @@ app.get('/books/:slug', (req, res) => {
   }).then((book) => {
     return book
   }).then((book) => {
-      res.render('books/show', { book: book });
+      res.render('books/show', { reader: req.session.reader, book: book });
     }).catch((error) => {
     res.status(404).end();
   });
