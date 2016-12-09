@@ -3,6 +3,12 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface.createTable('Gotbooks', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       BookId: {
         type: Sequelize.INTEGER,
         references: {
@@ -20,6 +26,14 @@ module.exports = {
         },
         onUpdate: 'cascade',
         onDelete: 'cascade'
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
 
     });

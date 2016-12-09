@@ -1,29 +1,20 @@
 const express = require('express'),
      db = require('../models'),
-     router = express.Router();
+     router = express.Router(),
+     bodyParser = require('body-parser');
 
 
 router.use(express.static('public'));
+router.use(bodyParser.urlencoded({ extended: false}));
 
-//post get book data
-
-//add get to db
-
-console.log('is anyone even listening to this route?');
 
 router.post('/get-book', (req, res) => {
-  console.log('did get-book post happen?');
-  console.log(req.session.reader.id);
-  console.log(req.params);
-  console.log(req.params[0]);
-
   db.Gotbook.create(req.body).then((Gotbook) => {
     req.session.reader.id = Gotbook.ReaderId;
-    req.params.id = Gotbook.BookId;
-    res.redirect('/books/my-profile');
-    console.log('posted that sweet book honey');
+    req.body.BookId = Gotbook.BookId;
+    res.render('/books/show', { reader: req.session.reader, book: book });
   }).catch((error) => {
-    res.redirect('/');
+    res.redirect('/books/:slug', { reader: req.session.reader, book: book });
   });
 });
 

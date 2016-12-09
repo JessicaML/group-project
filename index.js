@@ -108,7 +108,7 @@ app.get('/books/:slug', (req, res) => {
       slug: req.params.slug
     }
   }).then((book) => {
-    return book
+    return book;
   }).then((book) => {
       res.render('books/show', { reader: req.session.reader, book: book });
     }).catch((error) => {
