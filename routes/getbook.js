@@ -8,13 +8,20 @@ router.use(express.static('public'));
 router.use(bodyParser.urlencoded({ extended: false}));
 
 
+//post get book data
+
+//add get to db
+
+console.log('is anyone even listening to this route?');
+
 router.post('/get-book', (req, res) => {
+
   db.Gotbook.create(req.body).then((Gotbook) => {
     req.session.reader.id = Gotbook.ReaderId;
     req.body.BookId = Gotbook.BookId;
-    res.render('/books/show', { reader: req.session.reader, book: book });
+    res.redirect('/');
   }).catch((error) => {
-    res.redirect('/books/:slug', { reader: req.session.reader, book: book });
+    res.redirect('/');
   });
 });
 
