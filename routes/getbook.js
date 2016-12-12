@@ -17,9 +17,17 @@ console.log('is anyone even listening to this route?');
 router.post('/get-book', (req, res) => {
 
   db.Gotbook.create(req.body).then((Gotbook) => {
-    req.session.reader.id = Gotbook.ReaderId;
-    req.body.BookId = Gotbook.BookId;
+    console.log("create book beginning");
+    console.log("reader id");
+    console.log(req.body);
+    console.log("book id");
+    console.log(req.body.BookId);
+    where: {
+      BookId: req.body.BookId
+      ReaderId: req.body.ReaderId
+    }
     res.redirect('/');
+    console.log("data posted");
   }).catch((error) => {
     res.redirect('/');
   });

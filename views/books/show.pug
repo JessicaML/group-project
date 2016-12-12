@@ -10,7 +10,7 @@ block content
           p=book.id
           img(width="145" height="200" src=book.imgURL)
           p=book.description
-            //- form(action="/getbook/get-book" method="POST")
+          form(action="/getbook/get-book" method="POST")
             div(class="form-group")
               input(type="hidden" name="ReaderId" value=reader.id class="form-control")
             div(class="form-group")
