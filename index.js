@@ -46,9 +46,16 @@ app.use('/getbook', getbookRouter);
 //gets home page
 app.get('/', (req, res) => {
   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
-    res.render('index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader});
+    res.render('landing', { books: books, sponsor: req.session.sponsor, reader: req.session.reader});
   });
 });
+
+//gets home page
+// app.get('/', (req, res) => {
+//   db.Book.findAll({ order: [['createdAt', 'DESC']] }).then((books) => {
+//     res.render('index', { books: books, sponsor: req.session.sponsor, reader: req.session.reader});
+//   });
+// });
 
 
 

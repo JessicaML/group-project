@@ -1,0 +1,19 @@
+extends ./application.pug
+
+block content
+  .container
+    h2 Recently sponsored books
+    .jumbotron.text-center
+      h1 Bookclub
+      h2 Peer-to-peer book sponsoring
+    .container
+      .row
+        .col-sm-4
+          button.callback-button.btn.btn-default Callback hide
+          p.cb-hide This is a paragraph which will be hidden.
+        .col-sm-4
+          button.nocallback-button.btn.btn-default Now try without callback
+          p.ncb-hide This is a paragraph which will be hidden.
+        .col-sm-4
+          p.cb-show(style='display:none') Column 1 paragraph is now hidden.
+          p.ncb-show(style='display:none') Column 2 paragraph is now hidden.

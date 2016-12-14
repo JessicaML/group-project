@@ -17,19 +17,22 @@ console.log('is anyone even listening to this route?');
 router.post('/get-book', (req, res) => {
 
   db.Gotbook.create(req.body).then((Gotbook) => {
-    console.log("create book beginning");
-    console.log("reader id");
-    console.log(req.body);
-    console.log("book id");
-    console.log(req.body.BookId);
     where: {
       BookId: req.body.BookId
       ReaderId: req.body.ReaderId
     }
-    res.redirect('/');
+  }).then((book) => {
+    db.Book.findOne({
+      where: {
+        BookId: book.id
+      }
+    })
+  }).then((gotbook) => {
+      res.render('books/show', { reader: req.session.reader, gotbook: gotbook });
     console.log("data posted");
-  }).catch((error) => {
-    res.redirect('/');
+  }).catch((error, book) => {
+    console.log("error happened");
+    res.render('books/show', { reader: req.session.reader, book: book });
   });
 });
 

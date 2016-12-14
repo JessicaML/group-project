@@ -18,7 +18,7 @@ block content
 
     .row
       each book in books
-        .col-xs-3
+        .col-sm-4
           a(href="/books/" + book.slug)
             img(width="145" height="235" src=book.imgURL)
           h3= book.title

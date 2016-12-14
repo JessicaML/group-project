@@ -10,13 +10,20 @@ block content
           p=book.id
           img(width="145" height="200" src=book.imgURL)
           p=book.description
-          form(action="/getbook/get-book" method="POST")
-            div(class="form-group")
-              input(type="hidden" name="ReaderId" value=reader.id class="form-control")
-            div(class="form-group")
-              input(type="hidden" name="BookId" value=book.id class="form-control")
-            div(class="form-group text-xs-right")
-              button(type="submit" class="get-button btn btn-success") Get this book
+
+            if reader
+
+              //- form(action="/getbook/get-book" method="POST")
+              div(class="form-group")
+                input(type="hidden" name="ReaderId" value=reader.id class="form-control")
+              div(class="form-group")
+                input(type="hidden" name="BookId" value=book.id class="form-control")
+              div(class="form-group text-xs-right")
+                if gotbook
+                  button(class="btn btn-primary") Book sponsored!
+                else
+                  button(type="submit" class="get-button btn btn-success") Get this book
+
 
           script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
           script(src="/js/custom.js")

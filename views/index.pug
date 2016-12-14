@@ -13,16 +13,15 @@ block content
         p Taxidermy williamsburg butcher, slow-carb mustache literally mumblecore affogato gentrify PBR&B cold-pressed. Hammock coloring book put a bird on it roof party. Godard fap aesthetic selvage, vinyl fixie pug YOLO try-hard poke lomo iceland. Blue bottle lyft distillery, craft beer man bun brooklyn salvia. Ennui tote bag bespoke post-ironic, normcore tattooed glossier church-key pitchfork PBRB iceland lyft.
 
   .container.col-md-8
-    .row
-      .col-xs-8.offset-xs-2
-        h1 Bookclub
-        p Peer-to-peer book sponsoring
+    h1 Bookclub
+    p Peer-to-peer book sponsoring
 
-        .container
-          h1 Recently sponsored books
-          .row
-            each book in books
-              .col-xs-3
-                a(href="/books/" + book.slug)
-                  img(width="145" height="200" src=book.imgURL)
-                h3= book.title
+    .container
+      h2 Recently sponsored books
+      h2
+        .row
+          each book in books
+            .col-sm-4
+              a(href="/books/" + book.slug)
+                img(width="145" height="200" src=book.imgURL)
+              h3= book.title
