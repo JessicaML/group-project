@@ -1,19 +1,63 @@
-extends ./application.pug
+html
+  head
+    title Bookclub
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
+  body(style="background-image: url(../imgs/shelf.jpg)")
 
-block content
-  .container
-    h2 Recently sponsored books
-    .jumbotron.text-center
-      h1 Bookclub
-      h2 Peer-to-peer book sponsoring
-    .container
+    div.container(style="background-color:#46237A; color:#FCFCFC")
+      .col-md-8
+        hr
+        hr
+        hr
+        hr
+        hr
+        h1 Bookclub
+        h2 Peer-to-peer book sponsoring
+        p We match students with sponsors who want to share the books that they love...
+        hr
+        hr
+      .col-md-4
+        img.center-block(src='../imgs/book-stack.png' class="float-xs-right")
+
+    div.container(style="background-color:#256EFF")
+      .row
+        .col-sm-6(class="text-center")
+
+          a(href="/admin/users/reader" style="margin-top:25px" class="btn btn-success center-block text-center") Readers
+
+          p(style="margin: 0 auto") Are you wondering how you can pay for your university books?
+
+          a(href="/admin/users/reader") We can help
+
+        .col-sm-6
+
+          a(href="/admin/users/sponsor" style="margin-top:25px" class="btn btn-success center-block") Sponsors
+
+          p Want to share the books that have got you where you are today?
+
+          a(href="/admin/users/sponsor") Find out more
+
+    div.container(style="background-color:#FCFCFC")
       .row
         .col-sm-4
-          button.callback-button.btn.btn-default Callback hide
+          img.center-block(src='../imgs/books.png')
           p.cb-hide This is a paragraph which will be hidden.
         .col-sm-4
-          button.nocallback-button.btn.btn-default Now try without callback
+          img.img-responsive.center-block(src='../imgs/student.png')
           p.ncb-hide This is a paragraph which will be hidden.
         .col-sm-4
-          p.cb-show(style='display:none') Column 1 paragraph is now hidden.
-          p.ncb-show(style='display:none') Column 2 paragraph is now hidden.
+          img.img-responsive.center-block(src='../imgs/school.png')
+          p.ncb-show Column 2 paragraph is now hidden.
+    div.container(style="background-color:#FF495C")
+      .row
+        h1 About us
+        p
+        .col-sm-4
+          img.center-block(src='../imgs/mike.png' style="width:40px height:40px")
+          p Mike Eekhof
+        .col-sm-4
+          img.img-responsive.center-block(src='../imgs/jess.png')
+          p Jessica Leach
+        .col-sm-4
+          img.img-responsive.center-block(src='../imgs/lorenzo.png')
+          p Lorenzo Balzi
