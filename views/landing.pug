@@ -1,46 +1,31 @@
-html
-  head
-    title Bookclub
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous")
-  body(style="background-image: url(../imgs/shelf.jpg)")
+extends ./application.pug
 
-    div.container(style="background-color:#46237A; color:#FCFCFC")
+block content
+  body(style="background-image: url(../imgs/shelf.jpg)")
+    div.container(style="background-color:#46237A; color:#FCFCFC; height:600px; padding-top:35px; padding-bottom:50px")
       .col-md-8
-        hr
-        hr
-        hr
-        hr
-        hr
         h1 Bookclub
         h2 Peer-to-peer book sponsoring
         p(style="margin-right:40px") We match students with sponsors who want to share the books that they love...
-        hr
-        hr
       .col-md-4
         img.center-block(src='../imgs/book-stack.png' class="float-xs-right")
 
-    div.container(style="background-color:#85d893")
+    div.container(style="background-color:#85d893; height: 350px; padding-top:35px; padding-bottom:50px")
       .row
 
-        .col-sm-6(class="text-center")
-          a(href="/admin/users/reader" style="margin-top:25px" class="btn btn-success center-block text-center") Readers
+        .col-sm-6(style="margin-left: auto; margin-right: auto")
+          a(href="/admin/users/reader" style="margin-top:25px" class="btn btn-info center-block text-center") Readers
           p Are you wondering how you can pay for your university books?
           a(href="/admin/users/reader") We can help
-          hr
-          hr
 
         .col-sm-6
-          a(href="/admin/users/sponsor" style="margin-top:25px" class="btn btn-success center-block") Sponsors
+          a(href="/admin/users/sponsor" style="margin-top:25px" class="btn btn-info center-block") Sponsors
           p Want to share the books that have got you where you are today?
           a(href="/admin/users/sponsor") Find out more
-          hr
-          hr
 
-    div.container(style="background-color:#FCFCFC")
-      hr
-      hr
+    div.container(style="background-color:#FCFCFC; padding-top:35px; padding-bottom:25px")
       .row
-        .col-sm-4
+        .col-sm-4(style="margin-left: auto; margin-right: auto")
           img.center-block(src='../imgs/books.png')
           p Publish a booklist
         .col-sm-4
@@ -49,11 +34,9 @@ html
         .col-sm-4
           img.img-responsive.center-block(src='../imgs/school.png')
           p Get the books you need to succeed in your studies
-    div.container(style="background-color:#FF495C")
+    div.container(style="background-color:#FF495C; padding-top:35px; padding-bottom:50px")
       .row
         .container
-          hr
-          hr
           h1 About us
           .col-sm-4
             img.center-block(src='../imgs/mike.png' style="width:40px height:40px")
@@ -64,8 +47,3 @@ html
           .col-sm-4
             img.img-responsive.center-block(src='../imgs/lorenzo.png')
             p Lorenzo Balzi
-
-        hr
-        hr
-        hr
-        hr
