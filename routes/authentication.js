@@ -19,7 +19,7 @@ router.post('/login-sponsor', (req, res) => {
     bcrypt.compare(req.body.password, userInDB.passwordDigest, (error, result) => {
       if (result) {
         req.session.sponsor = userInDB;
-        res.redirect('/');
+        res.redirect('/books');
       } else {
         res.render('login');
       }
@@ -40,7 +40,7 @@ router.post('/login-reader', (req, res) => {
     bcrypt.compare(req.body.password, userInDB.passwordDigest, (error, result) => {
       if (result) {
         req.session.reader = userInDB;
-        res.redirect('/');
+        res.redirect('/books');
       } else {
         res.render('login');
       }

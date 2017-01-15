@@ -12,17 +12,22 @@ block content
           p=book.description
 
             if reader
+              form(action="/getbook/get-book" method="POST")
+                div(class="form-group")
+                  input(type="hidden" name="ReaderId" value=reader.id class="form-control")
+                div(class="form-group")
+                  input(type="hidden" name="BookId" value=book.id class="form-control")
+                div(class="form-group")
+                  input(type="hidden" name="bookSlug" value=book.slug class="form-control")
 
-              //- form(action="/getbook/get-book" method="POST")
-              div(class="form-group")
-                input(type="hidden" name="ReaderId" value=reader.id class="form-control")
-              div(class="form-group")
-                input(type="hidden" name="BookId" value=book.id class="form-control")
-              div(class="form-group text-xs-right")
-                if gotbook
-                  button(class="btn btn-primary") Book sponsored!
-                else
-                  button(type="submit" class="get-button btn btn-success") Get this book
+                div(class="form-group text-xs-right")
+                //- if book.id === gotbooks.bookId
+
+              if bookInDB
+                button(class="btn btn-primary") Book sponsored!
+              else
+
+                button(type="submit" class="get-button btn btn-success") Get this book
 
 
           script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")

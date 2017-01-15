@@ -12,28 +12,18 @@ router.use(bodyParser.urlencoded({ extended: false}));
 
 //add get to db
 
-console.log('is anyone even listening to this route?');
-
 router.post('/get-book', (req, res) => {
-
-  db.Gotbook.create(req.body).then((Gotbook) => {
-    where: {
-      BookId: req.body.BookId
-      ReaderId: req.body.ReaderId
-    }
-  }).then((book) => {
-    db.Book.findOne({
-      where: {
-        BookId: book.id
-      }
-    })
+  db.Gotbook.create(req.body).then((gotbook) => {
+    req.body.book = gotbook;
   }).then((gotbook) => {
-      res.render('books/show', { reader: req.session.reader, gotbook: gotbook });
+      res.redirect('/books/'+ req.body.bookSlug);
     console.log("data posted");
-  }).catch((error, book) => {
+  }).catch((error, gotbook) => {
     console.log("error happened");
-    res.render('books/show', { reader: req.session.reader, book: book });
+    res.redirect('/books/'+ req.body.bookSlug);
   });
 });
+
+
 
 module.exports = router;

@@ -6,31 +6,19 @@ var express = require('express'),
     router.use(bodyParser.urlencoded({ extended: false}));
 
 
-// var requireSponsor = (req, res, next) => {
-//   if (req.path === '/sponsor') {
-//     return next();
-//   }
-//   if (req.session.sponsor) {
-//     next();
-//   } else {
-//     res.redirect('/login-sponsor');
-//   }
-// };
-//
-// router.use(requireSponsor);
+var requireUser = (req, res, next) => {
+  if (req.path === '/admin' || '/getbook') {
+    return next();
+  }
+  if (req.session.sponsor || req.session.reader) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
 
-// var requireReader = (req, res, next) => {
-//   if (req.path === '/reader') {
-//     return next();
-//   }
-//   if (req.session.reader) {
-//     next();
-//   } else {
-//     res.redirect('/login-reader');
-//   }
-// };
-//
-// router.use(requireReader);
+router.use(requireUser);
+
 
 
 

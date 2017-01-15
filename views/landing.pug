@@ -2,48 +2,54 @@ extends ./application.pug
 
 block content
   body(style="background-image: url(../imgs/shelf.jpg)")
-    div.container(style="background-color:#46237A; color:#FCFCFC; height:600px; padding-top:35px; padding-bottom:50px")
+    div.container(style="background-color:#46237A; color:#FCFCFC; height:600px; padding-top:105px; padding-bottom:50px")
       .col-md-8
-        h1 Bookclub
+        h1(style="font-size:6em") Bookclub
         h2 Peer-to-peer book sponsoring
         p(style="margin-right:40px") We match students with sponsors who want to share the books that they love...
       .col-md-4
         img.center-block(src='../imgs/book-stack.png' class="float-xs-right")
 
-    div.container(style="background-color:#85d893; height: 350px; padding-top:35px; padding-bottom:50px")
+    div.container(style="background-color:#85d893; height: 250px; padding-top:35px; padding-bottom:50px")
       .row
 
-        .col-sm-6(style="margin-left: auto; margin-right: auto")
-          a(href="/admin/users/reader" style="margin-top:25px" class="btn btn-info center-block text-center") Readers
-          p Are you wondering how you can pay for your university books?
+        .col-sm-6
+          a(href="/admin/users/reader" style="margin-top:25px" class="btn btn-info") Readers
+          p(style="margin-top:25px") Are you wondering how you can pay for your university books?
           a(href="/admin/users/reader") We can help
 
         .col-sm-6
-          a(href="/admin/users/sponsor" style="margin-top:25px" class="btn btn-info center-block") Sponsors
-          p Want to share the books that have got you where you are today?
+          a(href="/admin/users/sponsor" style="margin-top:25px" class="btn btn-info") Sponsors
+          p(style="margin-top:25px") Want to share the books that have got you where you are today?
           a(href="/admin/users/sponsor") Find out more
 
-    div.container(style="background-color:#FCFCFC; padding-top:35px; padding-bottom:25px")
+    div.container(style="background-color:#FCFCFC; padding-top:35px; padding-bottom:25px; height:350px")
       .row
-        .col-sm-4(style="margin-left: auto; margin-right: auto")
-          img.center-block(src='../imgs/books.png')
-          p Publish a booklist
         .col-sm-4
-          img.img-responsive.center-block(src='../imgs/student.png')
-          p Support economically challenged students attain acheivement
+          img(style="padding-top:200px; position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/books.png')
+          p(style="padding-top:500px; position: absolute;left: 50%;transform: translate(-50%, -50%);") Publish a booklist
         .col-sm-4
-          img.img-responsive.center-block(src='../imgs/school.png')
-          p Get the books you need to succeed in your studies
-    div.container(style="background-color:#FF495C; padding-top:35px; padding-bottom:50px")
+          img(style="padding-top:200px; position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/student.png')
+          p(style="padding-top:500px; position: absolute;left: 50%;transform: translate(-50%, -50%);") Support economically challenged students
+        .col-sm-4
+          img(style="padding-top:200px; position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/school.png')
+          p(style="padding-top:500px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Get the books you need to succeed
+    div.container(style="background-color:#FF495C; padding-top:35px; padding-bottom:50px; height:450px")
       .row
         .container
-          h1 About us
+          h1(style="padding-top:50px; position: absolute;left: 50%;transform: translate(-50%, -50%);") Meet the team
           .col-sm-4
-            img.center-block(src='../imgs/mike.png' style="width:40px height:40px")
-            p Mike Eekhof
+            img(style="padding-top:300px;position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/mike.png')
+            p(style="padding-top:550px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Mike Eekhof
+            p(style="padding-top:620px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Concept developer
+
           .col-sm-4
-            img.img-responsive.center-block(src='../imgs/jess.png')
-            p Jessica Leach
+            img(style="padding-top:350px;position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/jess.png')
+            p(style="padding-top:600px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Jessica Leach
+            p(style="padding-top:670px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Back-end developer
+
+
           .col-sm-4
-            img.img-responsive.center-block(src='../imgs/lorenzo.png')
-            p Lorenzo Balzi
+            img(style="padding-top:300px;position: absolute;left: 50%;transform: translate(-50%, -50%);" src='../imgs/lorenzo.png')
+            p(style="padding-top:550px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Lorenzo Balzi
+            p(style="padding-top:620px;position: absolute;left: 50%;transform: translate(-50%, -50%);") Front-end developer
