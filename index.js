@@ -2,7 +2,7 @@ const express = require('express'),
       methodOverride = require('method-override'),
       pug = require('pug'),
       logger = require('morgan'),
-      bcrypt = require('bcrypt'),
+      bcrypt = require('bcryptjs'),
       session = require('express-session');
 
 var db = require('./models');
