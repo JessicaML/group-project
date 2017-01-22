@@ -24,6 +24,6 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "start": "node server"
+    "start": "index.js"
   }
 }
