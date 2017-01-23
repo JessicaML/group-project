@@ -18,6 +18,8 @@ module.exports = {
     "password": null,
     "database": "bookclub_production",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
+
   }
 };
