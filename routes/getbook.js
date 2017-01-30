@@ -5,7 +5,7 @@ const express = require('express'),
 
 
 router.use(express.static('public'));
-router.use(bodyParser.urlencoded({ extended: false}));
+router.use(bodyParser.urlencoded({ extended: false }));
 
 
 //post get book data
@@ -14,7 +14,10 @@ router.use(bodyParser.urlencoded({ extended: false}));
 
 router.post('/get-book', (req, res) => {
   db.Gotbook.create(req.body).then((gotbook) => {
+    console.log(req.body.id);
     req.body.book = gotbook;
+    console.log(gotbook);
+
   }).then((gotbook) => {
       res.redirect('/books/'+ req.body.bookSlug);
     console.log("data posted");
