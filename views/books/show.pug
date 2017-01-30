@@ -23,11 +23,12 @@ block content
                 div(class="form-group text-xs-right")
                 //- if book.id === gotbooks.bookId
 
+                button(type="submit" class="get-button btn btn-success") Get this book
+
               if bookInDB
-                button(class="btn btn-primary") Book sponsored!
+                p Book sponsored!
               else
 
-                button(type="submit" class="get-button btn btn-success") Get this book
 
 
           script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
